@@ -36,8 +36,7 @@
     <div class="col-md-6" ng-controller="ToBuyController as ToBuy">
      <h2>To Buy:</h2>
      <ul>
-       <li>Buy 10 cookies <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
-       <li>Buy 10 cookies <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
+       <li ng-repeat="item in ToBuy.Items">Buy 10 {{item.name}} <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
      </ul>
      <div class="emptyMessage">Everything is bought!</div>
     </div>
