@@ -11,11 +11,18 @@ angular.module('shoppingListModule', [])
         var ToBuy = this;
 
         ToBuy.Items = ShoppingListService.getItemsToBuy();
+        ToBuy.Click = function(index) {
+            console.log('click' + ' ' + index);
+            ShoppingListService.MarkAsBought(index);
+            ToBuy.Items = ShoppingListService.getItemsToBuy();
+        }
     }
 
-    AlreadyBoughtController.$inject = ['$scope'];
+    AlreadyBoughtController.$inject = ['ShoppingListService'];
     function AlreadyBoughtController(ShoppingListService) {
         var Bought = this;
+
+        Bought.Items = ShoppingListService.getBoughtItems();
     }
 
     function ShoppingListService() {
@@ -28,9 +35,19 @@ angular.module('shoppingListModule', [])
             {name: 'Milk', quantity: 2}
             ];
 
+        var boughtItems = [];
 
         service.getItemsToBuy = function () {
             return itemsToBuy;
+        }
+
+        service.getBoughtItems = function () {
+            return boughtItems;
+        }
+        service.MarkAsBought = function(index) {
+           var item = itemsToBuy[index];
+           boughtItems.push(item);
+           itemsToBuy.splice(index, 1);
         }
     };
 })();
