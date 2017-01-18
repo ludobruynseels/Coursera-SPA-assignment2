@@ -11,10 +11,16 @@ angular.module('shoppingListModule', [])
         var ToBuy = this;
 
         ToBuy.Items = ShoppingListService.getItemsToBuy();
-        ToBuy.Click = function(index) {
-            console.log('click' + ' ' + index);
+
+        ToBuy.Click = function (index) {
             ShoppingListService.MarkAsBought(index);
-            ToBuy.Items = ShoppingListService.getItemsToBuy();
+        }
+
+        ToBuy.isListEmpty = function () {
+            if (ShoppingListService.getItemsToBuy().length > 0)
+                return false;
+            else
+                return true;
         }
     }
 
@@ -23,6 +29,12 @@ angular.module('shoppingListModule', [])
         var Bought = this;
 
         Bought.Items = ShoppingListService.getBoughtItems();
+        Bought.isListEmpty = function () {
+            if (ShoppingListService.getBoughtItems().length > 0)
+                return false;
+            else
+                return true;
+        }
     }
 
     function ShoppingListService() {
