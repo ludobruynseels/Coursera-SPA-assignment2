@@ -1,43 +1,43 @@
 (function () {
 'use strict';
 
-angular.module('shoppingListModule', [])
+angular.module('ShoppingListCheckOff', [])
     .controller('ToBuyController', ToBuyController)
     .controller('AlreadyBoughtController', AlreadyBoughtController)
-    .service('ShoppingListService', ShoppingListService)
+    .service('ShoppingListCheckOffService', ShoppingListCheckOffService)
 
-    ToBuyController.$inject = ['ShoppingListService'];
-    function ToBuyController(ShoppingListService) {
+    ToBuyController.$inject = ['ShoppingListCheckOffService'];
+    function ToBuyController(ShoppingListCheckOffService) {
         var ToBuy = this;
 
-        ToBuy.Items = ShoppingListService.getItemsToBuy();
+        ToBuy.Items = ShoppingListCheckOffService.getItemsToBuy();
 
         ToBuy.Click = function (index) {
-            ShoppingListService.MarkAsBought(index);
+            ShoppingListCheckOffService.MarkAsBought(index);
         }
 
         ToBuy.isListEmpty = function () {
-            if (ShoppingListService.getItemsToBuy().length > 0)
+            if (ShoppingListCheckOffService.getItemsToBuy().length > 0)
                 return false;
             else
                 return true;
         }
     }
 
-    AlreadyBoughtController.$inject = ['ShoppingListService'];
-    function AlreadyBoughtController(ShoppingListService) {
+    AlreadyBoughtController.$inject = ['ShoppingListCheckOffService'];
+    function AlreadyBoughtController(ShoppingListCheckOffService) {
         var Bought = this;
 
-        Bought.Items = ShoppingListService.getBoughtItems();
+        Bought.Items = ShoppingListCheckOffService.getBoughtItems();
         Bought.isListEmpty = function () {
-            if (ShoppingListService.getBoughtItems().length > 0)
+            if (ShoppingListCheckOffService.getBoughtItems().length > 0)
                 return false;
             else
                 return true;
         }
     }
 
-    function ShoppingListService() {
+    function ShoppingListCheckOffService() {
         var service = this;
         // List of shopping items
         var itemsToBuy = [{name: 'Cookies', quantity: 10},
