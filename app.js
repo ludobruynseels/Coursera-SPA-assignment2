@@ -17,10 +17,7 @@ angular.module('ShoppingListCheckOff', [])
         }
 
         ToBuy.isListEmpty = function () {
-            if (ShoppingListCheckOffService.getItemsToBuy().length > 0)
-                return false;
-            else
-                return true;
+            return !ShoppingListCheckOffService.getItemsToBuy().length > 0;
         }
     }
 
@@ -30,10 +27,7 @@ angular.module('ShoppingListCheckOff', [])
 
         Bought.Items = ShoppingListCheckOffService.getBoughtItems();
         Bought.isListEmpty = function () {
-            if (ShoppingListCheckOffService.getBoughtItems().length > 0)
-                return false;
-            else
-                return true;
+            return ShoppingListCheckOffService.getBoughtItems().length <= 0;
         }
     }
 
